@@ -262,7 +262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a65b6c475103c83498d75b8af859aa8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 5
+  jumpForce: 10
+  gravity: 1.6
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,6 +387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 835818921}
   - component: {fileID: 835818920}
+  - component: {fileID: 835818922}
   m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
@@ -458,6 +460,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &835818922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835818919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07a5033fa93784f42abb0ae560e6c409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
 --- !u!1001 &1037688699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -545,9 +560,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obsticals:
+  - {fileID: 7934418273241852287, guid: a9ff6f60687275142a7cd382789e1721, type: 3}
   - {fileID: 991939217012165100, guid: 81e4341272b37124e98ae9eaafc12acb, type: 3}
-  spawnIntval: 3
-  startTime: 3
+  spawnIntval: 2
+  startTime: 2
   spawnPont: {fileID: 602623186}
 --- !u!4 &1087402479
 Transform:
@@ -614,7 +630,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

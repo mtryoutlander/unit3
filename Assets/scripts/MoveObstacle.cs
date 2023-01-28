@@ -17,6 +17,6 @@ public class MoveObstacle : MonoBehaviour
     {
         transform.Translate(Vector3.forward * speedOfObstical * Time.deltaTime);
         if(transform.position.x < minX)
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
     }
 }
