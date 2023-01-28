@@ -9,20 +9,24 @@ public class GameControler : MonoBehaviour
     public GameObject[] obsticals;
     public float spawnIntval=3, startTime=3;
     public GameObject spawnPont;
+    public bool gameOver = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpawnObstical",startTime,spawnIntval);
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
+        InvokeRepeating(nameof(SpawnObstical), startTime, spawnIntval);
+        PlayerControls.OnHit += endSpawn;
     }
 
     private void SpawnObstical()
     {
-        Instantiate(obsticals[UnityEngine.Random.Range(0, obsticals.Length)], spawnPont.transform);
+        if (!gameOver)
+        {
+            Instantiate(obsticals[UnityEngine.Random.Range(0, obsticals.Length)], spawnPont.transform);
+        }
+    }
+    private void endSpawn()
+    {
+        gameOver= true;
     }
 }

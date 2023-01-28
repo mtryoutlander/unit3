@@ -34,7 +34,7 @@ public class PlayerControls : MonoBehaviour
     {
         if(collision.gameObject.tag == "floor")
             inAir= false;
-        if(collision.gameObject.tag == "obstical")
+        if(collision.gameObject.tag == "gameOver")
         {
             if (OnHit != null)
             {

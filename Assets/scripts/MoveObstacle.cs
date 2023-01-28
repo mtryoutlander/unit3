@@ -9,7 +9,7 @@ public class MoveObstacle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        PlayerControls.OnHit += () => { Destroy(transform.parent.gameObject); };
     }
 
     // Update is called once per frame
