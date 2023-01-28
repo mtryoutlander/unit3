@@ -15,7 +15,7 @@ public class GameControler : MonoBehaviour
     void Start()
     {
         InvokeRepeating(nameof(SpawnObstical), startTime, spawnIntval);
-        PlayerControls.OnHit += endSpawn;
+        CanvasControler.EndGame += endSpawn;
     }
 
     private void SpawnObstical()

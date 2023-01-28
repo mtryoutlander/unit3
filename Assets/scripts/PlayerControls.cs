@@ -31,6 +31,8 @@ public class PlayerControls : MonoBehaviour
             inAir = true;
             animation.SetTrigger("Jump_trig");
         }
+        if (transform.position.x < -8)
+            OnHit();
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -39,20 +41,12 @@ public class PlayerControls : MonoBehaviour
             inAir = false;
             animation.ResetTrigger("Jump_trig");
         }
-        if(collision.gameObject.tag == "gameOver")
-        {
-            if (OnHit != null)
-            {
-                OnHit();
-                Debug.Log("player hit event");
-            }
-
-        }
         if (collision.gameObject.tag == "obstical")
         {
             Debug.Log("hit obstical");
-            Destroy(collision.gameObject);
-            transform.position = new Vector3(transform.position.x-pushBack, transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x - pushBack, transform.position.y, transform.position.z);
+            Destroy(collision.transform.parent.gameObject);
+            
         }
 
     }

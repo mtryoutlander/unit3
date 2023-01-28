@@ -8,13 +8,11 @@ public class CanvasControler : MonoBehaviour
 {
     private Text gameOverText, timmer;
     private float gameTimer =0;
+    public delegate void GameOverEvent();
+    public static event GameOverEvent EndGame;
     private void OnEnable()
     {
         PlayerControls.OnHit += GameOver;
-    }
-    private void OnDisable()
-    {
-        PlayerControls.OnHit -= GameOver;
     }
 
     private void Start()
@@ -33,6 +31,7 @@ public class CanvasControler : MonoBehaviour
     private void GameOver()
     {
         gameOverText.enabled= true;
-        
+        if(EndGame != null)
+            EndGame();
     }
 }
