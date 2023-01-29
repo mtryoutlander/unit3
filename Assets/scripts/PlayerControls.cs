@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class PlayerControls : MonoBehaviour
 {
@@ -15,14 +16,17 @@ public class PlayerControls : MonoBehaviour
     private Animator animation;
     private bool inAir=false;
     private Rigidbody rb;
+    private bool gameOver = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameOver= false;
         rb = GetComponent<Rigidbody>();
         Physics.gravity *= gravity;
         animation= GetComponent<Animator>();
         playerAudio= GetComponent<AudioSource>();
+        CanvasControler.EndGame+= GameOver;
         
     }
 
@@ -39,6 +43,11 @@ public class PlayerControls : MonoBehaviour
         }
         if (transform.position.x < -8)
             OnHit();
+        if(Input.GetKeyDown(KeyCode.R) && !!gameOver)
+        {
+            SceneManager.LoadScene("Prototype 3");
+        }
+            
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -58,5 +67,9 @@ public class PlayerControls : MonoBehaviour
             
         }
 
+    }
+    private void GameOver()
+    {
+        gameOver = true;
     }
 }
