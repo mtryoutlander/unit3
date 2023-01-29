@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MoveBackground : MonoBehaviour
 {
-
     [SerializeField] private float speed =10f;
     private float reapWidth;
     private Vector3 startPos;
@@ -13,6 +12,7 @@ public class MoveBackground : MonoBehaviour
     {
         startPos = transform.position;
         reapWidth = GetComponent<BoxCollider>().size.x/2;
+        Debug.Log("reapWidth of : "+ gameObject+ " " + reapWidth);
         PlayerControls.OnHit += Stop;
     }
     private void OnEnable()
@@ -27,11 +27,11 @@ public class MoveBackground : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(transform.position.x < startPos.x - reapWidth) 
-            transform.position = startPos;
-        else
-            if(!playerBeenHit)
-                transform.Translate(Vector3.left * Time.deltaTime * speed);
+            if(transform.position.x < startPos.x - reapWidth) 
+                transform.position = startPos;
+            else
+                if(!playerBeenHit)
+                    transform.Translate(Vector3.left * Time.deltaTime * speed);
     }
     private void Stop()
     {

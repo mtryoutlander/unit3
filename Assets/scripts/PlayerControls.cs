@@ -8,8 +8,11 @@ public class PlayerControls : MonoBehaviour
     public float jumpForce =5f, gravity = 1f, pushBack = 5;
     public delegate void PlayerHitObstical();
     public static event PlayerHitObstical OnHit;
+    public ParticleSystem explosionPartical, dirtPartical;
+    public AudioClip jump, crash;
+
+    private AudioSource playerAudio;
     private Animator animation;
-    
     private bool inAir=false;
     private Rigidbody rb;
 
@@ -19,6 +22,7 @@ public class PlayerControls : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Physics.gravity *= gravity;
         animation= GetComponent<Animator>();
+        playerAudio= GetComponent<AudioSource>();
         
     }
 
@@ -28,7 +32,9 @@ public class PlayerControls : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && !inAir)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            dirtPartical.Stop();
             inAir = true;
+            playerAudio.PlayOneShot(jump);
             animation.SetTrigger("Jump_trig");
         }
         if (transform.position.x < -8)
@@ -36,14 +42,17 @@ public class PlayerControls : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "floor")
-        {
-            inAir = false;
-            animation.ResetTrigger("Jump_trig");
-        }
+        if(inAir)
+            if (collision.gameObject.tag == "floor")
+            {
+                inAir = false;
+                dirtPartical.Play();
+                animation.ResetTrigger("Jump_trig");
+            }
         if (collision.gameObject.tag == "obstical")
         {
-            Debug.Log("hit obstical");
+            playerAudio.PlayOneShot(crash);
+            explosionPartical.Play();
             transform.position = new Vector3(transform.position.x - pushBack, transform.position.y, transform.position.z);
             Destroy(collision.transform.parent.gameObject);
             
